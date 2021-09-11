@@ -38,12 +38,12 @@ public class BoardController {
 		try {
 			boolean isRegistered = boardService.registerBoard(params);
 			if (isRegistered == false) {
-				
+				//게시글 등록 실패시 메세지 전달
 			}
 		} catch (DataAccessException e) {
-			
+			//DB 처리 과정에서 오류 발생시 메세지 전달
 		} catch (Exception e) {
-
+			//시스템 문제 발생시 메세지 전달 
 		}
 		return "redirect:/board/list.do";
 	}
@@ -67,5 +67,23 @@ public class BoardController {
 		}
 		model.addAttribute("board", board);
 		return "board/view";
+	}
+	
+	@PostMapping(value = "/board/delete.do")
+	public String deleteBoard(@RequestParam(value = "idx", required = false) Long idx) {
+		if (idx == null) {
+			return "redirect:/board/list.do";
+		}
+		try {
+			boolean isDeleted = boardService.deleteBoard(idx);
+			if (isDeleted == false) {
+				//게시글 삭제 실패시 메세지 전달
+			}
+		} catch (DataAccessException e) {
+			//DB 처리 과정에서 오류 발생시 메세지 전달
+		} catch (Exception e) {
+			//시스템 문제 발생시 메세지 전달
+		}
+		return "redirect:/board/list.do";
 	}
 }

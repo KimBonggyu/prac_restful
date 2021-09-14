@@ -1,11 +1,9 @@
 package com.board.domain;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
-public class BoardDTO {
+public class BoardDTO extends CommonDTO{
 
 	/** 번호 (PK) */
 	private Long idx;
@@ -27,17 +25,5 @@ public class BoardDTO {
 
 	/** 비밀 여부 */
 	private String secretYn;
-
-	/** 삭제 여부 */
-	private String deleteYn;
-
-	/** 등록일 */
-	private Date insertTime;
-
-	/** 수정일 */
-	private Date updateTime;
-
-	/** 삭제일 */
-	private Date deleteTime;
 
 }

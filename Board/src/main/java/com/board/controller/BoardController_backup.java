@@ -17,7 +17,7 @@ import com.board.service.BoardService;
 import com.board.util.UiUtils;
 
 @Controller
-public class BoardController extends UiUtils{
+public class BoardController_backup extends UiUtils{
 	
 	@Autowired
 	private BoardService boardService;

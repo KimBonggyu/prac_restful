@@ -1,6 +1,6 @@
 package com.board.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import com.board.paging.Criteria;
 import com.board.paging.PaginationInfo;
@@ -17,12 +17,12 @@ public class CommonDTO extends Criteria{
 	private String deleteYn;
 
 	/** 등록일 */
-	private Date insertTime;
+	private LocalDateTime insertTime;
 
 	/** 수정일 */
-	private Date updateTime;
+	private LocalDateTime updateTime;
 
 	/** 삭제일 */
-	private Date deleteTime;
+	private LocalDateTime deleteTime;
 
 }

@@ -47,8 +47,8 @@ class MapperTests {
 	@Test
 	public void testOfUpdate() {
 		BoardDTO params = new BoardDTO();
-		params.setTitle("1번 게시글 제목_수정1");
-		params.setContent("1번 게시글 내용_수정1");
+		params.setTitle("1번 게시글 제목_수정2");
+		params.setContent("1번 게시글 내용_수정2");
 		params.setWriter("김봉규");
 		params.setIdx((long) 1);
 

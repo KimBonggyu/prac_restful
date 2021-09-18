@@ -31,7 +31,7 @@
 				<div class="form-group">
 					<label for="inp-type-5" class="col-sm-2 control-label">등록일</label>
 					<div class="col-sm-10">
-						<p class="form-control" th:text="*{#calendars.format( insertTime, 'yyyy-MM-dd' )}"></p>
+						<p class="form-control" th:text="*{#temporals.format( insertTime, 'yyyy-MM-dd' )}"></p>
 					</div>
 				</div>
 				
@@ -66,20 +66,7 @@
 						<button type="button" class="btn waves-effect waves-light"><i class="fa fa-commenting" aria-hidden="true"></i></button>
 						</div>
 					</div>
-					<ul class="notice-list">
-						<li>
-							<span class="name">Kim Bonggyu</span>
-							<span class="desc">practice desc</span>
-							<span class="time">2021.09.11</span>
-							<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
-						</li>
-						<li>
-							<span class="name">Kim Bonggyu_2</span>
-							<span class="desc">practice desc_2</span>
-							<span class="time">2021.09.30</span>
-							<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
-						</li>
-					</ul>
+					<ul class="notice-list"></ul>
 				</form>
 			</div>
 		</div>
@@ -88,6 +75,39 @@
 	<th:block layout:fragment="script">
 		<script th:inline="javascript">
 			/*<![CDATA[*/
+				
+			$(function() {
+				printCommentList();
+			});
+			
+			function printCommentList() {
+				
+				var uri = /*[[ @{/comments/} + ${board.idx} ]]*/"";
+				
+				$.get(uri, function(response) {
+					if (isEmpty(response) == false) {
+						var commentsHtml = "";
+						
+						$(response.commentList).each(function(idx, comment) {
+							commentsHtml += `<li>
+							<span class="name">${comment.writer}</span>
+							<span class="desc">${comment.content}</span>
+							<span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+							<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
+							</li>`;
+							/* commentsHtml += `
+								<li>
+									<span class="name">${comment.writer}</span>
+									<span class="desc">${comment.content}</span>
+									<span class="time">${moment(comment.insertTime).format('YYYY-MM-DD HH:mm:ss')}</span>
+									<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
+								</li>
+							`; */
+						});
+						$(".notice-list").html(commentsHtml);
+					}
+				}, "json");
+			}
 				
 			function deleteBoard(idx, queryString) {
 
